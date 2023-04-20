@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="payment-methods.css">
+</head> 
+<body>
+    <div id="payment-form">
+        <h2>Payment Method</h2>
+        <label>
+          <input type="radio" name="payment-method" value="credit-card" checked> Credit Card
+        </label>
+        <label>
+          <input type="radio" name="payment-method" value="mobile-money"> Mobile Money
+        </label>
+      
+        <div id="credit-card-details">
+          <h3>Credit Card Details</h3>
+          <form id="credit-card-form">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" required>
+            <br>
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY" required>
+            <br>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" required>
+            <br>
+            <button type="submit">Submit Payment</button>
+            <a href="Tracking.html" class="btn btn-primary"></a>
+          </form>
+        </div>
+      
+        <div id="mobile-money-details">
+          <h3>Mobile Money Details</h3>
+          <form id="mobile-money-form">
+            <label for="mobile-money-number">Mobile Money Number:</label>
+            <input type="text" id="mobile-money-number" required>
+            <br>
+            <label for="mobile-money-amount">Amount:</label>
+            <input type="number" id="mobile-money-amount" required>
+            <br>
+            <button type="submit">Submit Payment</button>
+            <a href="Tracking.html" class="btn btn-primary">git</a>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Delivery Tracking</title>
+    <link rel="stylesheet" type="text/css" href="Tracking.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Delivery Tracking</h1>
+      <div class="tracking">
+        <form>
+          <label for="tracking-number">Enter your tracking number:</label>
+          <input type="text" id="tracking-number" name="tracking-number" required>
+          <button type="submit">Track</button>
+        </form>
+        <div id="tracking-results" class="tracking-results hidden">
+          <h2>Tracking results for <span id="tracking-number-display"></span></h2>
+          <div class="status">
+            <p>Status: <span id="status"></span></p>
+            <p>Estimated delivery date: <span id="delivery-date"></span></p>
+          </div>
+          <div class="location">
+            <p>Location: <span id="location"></span></p>
+            <div id="map"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="Tracking.js"></script>
+  </body>
+</html>

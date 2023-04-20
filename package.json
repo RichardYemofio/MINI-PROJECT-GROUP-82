@@ -1,0 +1,14 @@
+{
+  "name": "espress",
+  "version": "1.0.0",
+  "description": "delivery services",
+  "main": "('express');.js",
+  "scripts": {
+    "test": "port 3000"
+  },
+  "author": "Richard Yemofio",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.0.1"
+  }
+}

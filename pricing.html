@@ -1,0 +1,146 @@
+ <!DOCTYPE html>
+<html>
+ <head>
+   <!-- Add a div for the pricing list -->
+<div id="pricing-list">
+    <h2>Pricing</h2>
+    <ul>
+      <li>
+        <h3>Small Package</h3>
+        <p>Up to 5kg</p>
+        <p>$10</p>
+      </li>
+      <li>
+        <h3>Medium Package</h3>
+        <p>Up to 10kg</p>
+        <p>$20</p>
+      </li>
+      <li>
+        <h3>Large Package</h3>
+        <p>Up to 20kg</p>
+        <p>$30</p>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Add a form for selecting the package size -->
+  <form>
+    <label for="package-size">Select package size:</label>
+    <select id="package-size" name="package-size">
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select>
+  </form>
+  <!-- Add a button for calculating the price -->
+<button id="calculate-price-button">Calculate Price</button>
+
+<!-- Add a div for displaying the price -->
+<div id="price"></div>
+
+  
+  <script>
+    // Define the prices for each package size
+    const prices = {
+      small: 10,
+      medium: 20,
+      large: 30,
+    };
+  
+    // Get the selected package size and calculate the price
+    const calculatePrice = () => {
+      const packageSize = document.getElementById('package-size').value;
+      const price = prices[packageSize];
+  
+      // Display the price on the page
+      document.getElementById('price').innerText = `Price: $${price}`;
+    };
+  
+    // Listen for the calculate price button to be clicked
+    document.getElementById('calculate-price-button').addEventListener('click', calculatePrice);
+  </script>
+  
+  <style>
+    body {
+        background-image: url('banner.jpg');
+        background-size: cover;
+        background-position: center;
+      background-color: #f1f1f1;
+    }
+    #pricing-list {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f7f7f7;
+      border-radius: 5px;
+    }
+  
+    #pricing-list h2 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+  
+    #pricing-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    #pricing-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+  
+    #pricing-list li:last
+  border-bottom: none;
+  }
+  
+  #pricing-list h3 {
+  font-size: 20px;
+  margin: 0;
+  }
+  
+  #pricing-list p {
+  margin: 0;
+  }
+  
+  form {
+  display: flex;
+  margin-top: 20px;
+  }
+  
+  label {
+  font-size: 16px;
+  margin-right: 10px;
+  }
+  
+  select {
+  font-size: 16px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  }
+  
+  #calculate-price-button {
+  font-size: 16px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  }
+  
+  #price {
+  font-size: 24px;
+  margin-top: 20px;
+  }
+  </style>
+  
+</head>
+</html>

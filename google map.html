@@ -1,0 +1,59 @@
+<!-- Include the Google Maps API script in your HTML file -->
+<script src="https://maps.googleapis.com/maps/api/js?key=ZwNu65DRWnRBRir3XdIpu11sO9e8NV3KfkzBWQyyaKMi2ocINsOHbyhT7neLGnEt"></script>
+
+<!-- Add a div for the map -->
+<div id="map"></div>
+
+<script>
+  // Initialize the map
+  function initMap() {
+    // Get the user's current location using the Geolocation API
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+
+      // Create a new map centered on the user's location
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: latitude, lng: longitude },
+        zoom: 12,
+      });
+
+      // Add a marker for the user's location
+      const userMarker = new google.maps.Marker({
+        position: { lat: latitude, lng: longitude },
+        map,
+        title: 'You are here',
+      });
+
+      // Add a search box for finding delivery addresses
+      const deliveryAddressInput = document.getElementById('delivery-address');
+      const deliveryAddressAutocomplete = new google.maps.places.Autocomplete(deliveryAddressInput);
+      deliveryAddressAutocomplete.setFields(['formatted_address', 'geometry']);
+
+      // Listen for the user to select a delivery address from the search box
+      deliveryAddressAutocomplete.addListener('place_changed', () => {
+        const place = deliveryAddressAutocomplete.getPlace();
+
+        // Calculate the distance and duration between the user's location and the delivery address
+        const distanceMatrixService = new google.maps.DistanceMatrixService();
+        distanceMatrixService.getDistanceMatrix({
+          origins: [{ lat: latitude, lng: longitude }],
+          destinations: [place.geometry.location],
+          travelMode: 'DRIVING',
+        }, (response, status) => {
+          if (status === 'OK') {
+            const { distance, duration } = response.rows[0].elements[0];
+
+            // Update the delivery information on the page
+            document.getElementById('delivery-address').value = place.formatted_address;
+            document.getElementById('delivery-distance').innerText = distance.text;
+            document.getElementById('delivery-duration').innerText = duration.text;
+          } else {
+            console.error('Failed to get distance matrix:', status);
+          }
+        });
+      });
+    }, error => {
+      console.error('Failed to get user location:', error);
+    });
+  }
+</script>

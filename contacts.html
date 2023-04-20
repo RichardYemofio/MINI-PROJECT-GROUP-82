@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Contact form -->
+<form id="contact-form">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+  </div>
+  <button type="submit" id="submit-button">Submit</button>
+</form>
+
+<!-- Display messages -->
+<div id="messages"></div>
+<script>
+    // Select form element and submit button
+const form = document.getElementById('contact-form');
+const submitButton = document.getElementById('submit-button');
+
+// Add event listener to submit button
+submitButton.addEventListener('click', (event) => {
+  // Prevent default form submission
+  event.preventDefault();
+
+  // Get form data
+  const formData = new FormData(form);
+
+  // Send form data to server using AJAX
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/contact');
+  xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      // If successful, display success message
+      document.getElementById('messages').innerHTML = 'Message sent!';
+    } else {
+      // If error, display error message
+      document.getElementById('messages').innerHTML = 'Error sending message.';
+    }
+  };
+  xhr.send(JSON.stringify(Object.fromEntries(formData)));
+});
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.json());
+
+app.post('/contact', (req, res) => {
+  // Handle form data here (e.g. send email, save to database, etc.)
+  console.log(req.body);
+  
+  // Send response
+  res.status(200).send('OK');
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+</script>
+<style>
+    body {
+        background-image: url('banner.jpg');
+        background-size: cover;
+        background-position: center;
+      background-color: #f1f1f1;
+    }
+    /* Contact form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    height: 150px;
+  }
+  
+  button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Messages styles */
+  #messages {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  #messages.success {
+    color: green;
+  }
+  
+  #messages.error {
+    color: red;
+  }
+</style>
+</head>
+</html>
